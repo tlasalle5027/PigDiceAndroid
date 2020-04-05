@@ -32,8 +32,7 @@ public class Options extends AppCompatActivity {
         os.setDifficulty(difficulty);
         os.setEndScore(finalScore);
 
-        Intent i = new Intent(Options.this, MainActivity.class);
-        startActivity(i);
+        finish();
     }
 
     public void clearOptions(View view) {

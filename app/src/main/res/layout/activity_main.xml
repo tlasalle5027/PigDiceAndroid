@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="344dp"
-        android:layout_height="169dp"
+        android:layout_width="288dp"
+        android:layout_height="137dp"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="3dp"
@@ -31,7 +31,7 @@
         android:layout_marginRight="3dp"
         android:layout_marginBottom="1dp"
         android:text="@string/new_game"
-        android:textSize="64sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/optionsButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.415"
@@ -40,8 +40,8 @@
 
     <Button
         android:id="@+id/optionsButton"
-        android:layout_width="342dp"
-        android:layout_height="152dp"
+        android:layout_width="288dp"
+        android:layout_height="137dp"
         android:layout_marginStart="11dp"
         android:layout_marginLeft="11dp"
         android:layout_marginTop="3dp"
@@ -50,7 +50,7 @@
         android:layout_marginBottom="64dp"
         android:onClick="openOptions"
         android:text="@string/options"
-        android:textSize="64sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.418"
