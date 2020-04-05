@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Options">
+
+    <TableLayout
+        android:layout_width="342dp"
+        android:layout_height="588dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:id="@+id/nameRow"
+            android:layout_width="match_parent"
+            android:layout_height="68dp">
+
+            <TextView
+                android:id="@+id/nameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
+
+            <EditText
+                android:id="@+id/nameText"
+                android:layout_width="162dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/setNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/set_name" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/difficultyRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/difficultyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/difficulty" />
+
+            <RadioGroup
+                android:id="@+id/difficultyGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/easyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="difficultyRadioButtonClick"
+                    android:text="@string/diff_easy" />
+
+                <RadioButton
+                    android:id="@+id/intButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="difficultyRadioButtonClick"
+                    android:text="@string/diff_int" />
+
+                <RadioButton
+                    android:id="@+id/hardButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="difficultyRadioButtonClick"
+                    android:text="@string/diff_hard" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/endScoreRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/endScoreLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_score" />
+
+            <RadioGroup
+                android:id="@+id/endScoreGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/fiftyPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="scoreRadioButtonClick"
+                    android:text="50" />
+
+                <RadioButton
+                    android:id="@+id/oneHundredPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="scoreRadioButtonClick"
+                    android:text="100" />
+
+                <RadioButton
+                    android:id="@+id/oneHundredFiftyPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="scoreRadioButtonClick"
+                    android:text="150" />
+
+                <RadioButton
+                    android:id="@+id/twoHundredPoints"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="scoreRadioButtonClick"
+                    android:text="200" />
+
+                <RadioButton
+                    android:id="@+id/marathonMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="scoreRadioButtonClick"
+                    android:text="Marathon Mode (500)" />
+            </RadioGroup>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/buttonRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveOptions"
+                android:text="@string/opt_save" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/clearButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="clearOptions"
+                android:text="@string/opt_clear" />
+        </TableRow>
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

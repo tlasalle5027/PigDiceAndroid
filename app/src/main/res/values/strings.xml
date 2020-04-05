@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Pig Dice</string>
+    <string name="new_game">New Game</string>
+    <string name="options">Options</string>
+    <string name="name">Name: </string>
+    <string name="difficulty">AI Difficulty: </string>
+    <string name="end_score">Ending Score: </string>
+    <string name="diff_easy">Easy</string>
+    <string name="diff_int">Intermediate</string>
+    <string name="diff_hard">Hard</string>
+    <string name="set_name">Set</string>
+    <string name="opt_save">Save</string>
+    <string name="opt_clear">Clear</string>
+</resources>
