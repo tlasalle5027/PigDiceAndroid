@@ -2,6 +2,7 @@ package com.tel5027.pigdice.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,9 +13,9 @@ import com.tel5027.pigdice.Util.OptionStore;
 
 public class Options extends AppCompatActivity {
     
-    public OptionStore os;
+    public static OptionStore os;
 
-    private EditText name;
+    public EditText name;
     private int difficulty = 1;
     private int finalScore = 100;
 
@@ -26,15 +27,26 @@ public class Options extends AppCompatActivity {
     }
 
     public void saveOptions(View view) {
-        name = view.findViewById(R.id.nameText);
+        name = (EditText)findViewById(R.id.nameText);
         os.setName(name.getText().toString());
         os.setDifficulty(difficulty);
         os.setEndScore(finalScore);
+
+        Intent i = new Intent(Options.this, MainActivity.class);
+        startActivity(i);
     }
 
     public void clearOptions(View view) {
-        name = view.findViewById(R.id.nameText);
+        RadioButton easyButton = (RadioButton)findViewById(R.id.easyButton);
+        RadioButton hundredButton = (RadioButton)findViewById(R.id.oneHundredPoints);
+        name = (EditText)findViewById(R.id.nameText);
         name.setText("");
+        easyButton.toggle();
+        hundredButton.toggle();
+
+        os.setName("PigDice");
+        os.setDifficulty(1);
+        os.setEndScore(100);
     }
 
     public void difficultyRadioButtonClick(View view) {

@@ -7,7 +7,7 @@ public class OptionStore {
 
     public OptionStore(){
         name = "PigDice";
-        difficulty = 0;
+        difficulty = 1;
         endScore=100;
     }
 
