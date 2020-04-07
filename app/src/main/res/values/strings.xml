@@ -11,4 +11,8 @@
     <string name="set_name">Set</string>
     <string name="opt_save">Save</string>
     <string name="opt_clear">Clear</string>
+    <string name="roll">Roll Dice</string>
+    <string name="stay">Stay</string>
+    <string name="skip">Skip</string>
+    <string name="quit">Quit</string>
 </resources>
