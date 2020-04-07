@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.tel5027.pigdice.R;
 
 import com.google.android.gms.ads.MobileAds;
@@ -13,6 +16,8 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class MainActivity extends AppCompatActivity {
+
+    private InterstitialAd startGameAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +29,25 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+        startGameAd = new InterstitialAd(this);
+        startGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        startGameAd.loadAd(new AdRequest.Builder().build());
     }
 
     public void openOptions(View view) {
         Intent i = new Intent(MainActivity.this, Options.class);
         startActivity(i);
+
+    }
+
+    public void openGame(View view) {
+        if (startGameAd.isLoaded()) {
+            startGameAd.show();
+        } else {
+            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        }
+
+
 
     }
 }

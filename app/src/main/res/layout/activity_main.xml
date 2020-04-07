@@ -30,6 +30,7 @@
         android:layout_marginEnd="3dp"
         android:layout_marginRight="3dp"
         android:layout_marginBottom="1dp"
+        android:onClick="openGame"
         android:text="@string/new_game"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/optionsButton"
