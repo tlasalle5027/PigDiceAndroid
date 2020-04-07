@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.tel5027.pigdice.Controller.GameLogic;
 import com.tel5027.pigdice.R;
@@ -13,6 +14,13 @@ public class GameActivity extends AppCompatActivity {
 
     public OptionStore os;
     private GameLogic engine;
+    private View gameScreen;
+
+    private TextView pName;
+    private TextView pScore;
+    private TextView cName;
+    private TextView cScore;
+    private TextView runScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +35,10 @@ public class GameActivity extends AppCompatActivity {
         }
 
         engine = new GameLogic(os);
+
+        gameScreen = this.findViewById(android.R.id.content);
+
+        runScore = (TextView)findViewById(R.id.runningScoreView);
     }
 
     public void quitGame(View view) {
@@ -34,6 +46,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void rollDice(View view) {
-        engine.playerTurn(view);
+        engine.playerTurn(gameScreen);
+        runScore.setText(Integer.toString(engine.getRunningScore()));
     }
 }
