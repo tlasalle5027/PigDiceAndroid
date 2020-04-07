@@ -73,6 +73,7 @@
         app:srcCompat="@drawable/die_1" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="412dp"
         android:layout_height="159dp"
         android:layout_marginTop="57dp"
@@ -87,18 +88,53 @@
             android:id="@+id/rollButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="rollDice"
             android:text="@string/roll" />
 
         <Button
             android:id="@+id/stayButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:enabled="false"
             android:text="@string/stay" />
 
         <Button
             android:id="@+id/quitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="quitGame"
             android:text="@string/quit" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/runningScoreLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/running_score"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/runningScoreView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diceImage" />
+
+    <TextView
+        android:id="@+id/runningScoreView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="49dp"
+        android:layout_marginLeft="49dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="176dp"
+        android:layout_marginRight="176dp"
+        android:layout_marginBottom="37dp"
+        android:text="0"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/runningScoreLabel"
+        app:layout_constraintTop_toBottomOf="@+id/diceImage"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
