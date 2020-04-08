@@ -38,7 +38,25 @@ public class GameActivity extends AppCompatActivity {
 
         gameScreen = this.findViewById(android.R.id.content);
 
+        pName = (TextView)findViewById(R.id.playerName);
+        pScore = (TextView)findViewById(R.id.playerScore);
+        cName = (TextView)findViewById(R.id.compName);
+        cScore = (TextView)findViewById(R.id.compScore);
         runScore = (TextView)findViewById(R.id.runningScoreView);
+
+        pName.setText(os.getName());
+
+        switch(os.getDifficulty()){
+            case 1:
+                cName.setText("Earl");
+                break;
+            case 2:
+                cName.setText("Ian");
+                break;
+            case 3 :
+                cName.setText("Harry");
+                break;
+        }
     }
 
     public void quitGame(View view) {
@@ -48,5 +66,11 @@ public class GameActivity extends AppCompatActivity {
     public void rollDice(View view) {
         engine.playerTurn(gameScreen);
         runScore.setText(Integer.toString(engine.getRunningScore()));
+    }
+
+    public void endTurn(View view) {
+        engine.endTurn(gameScreen);
+        runScore.setText(Integer.toString(engine.getRunningScore()));
+        pScore.setText(Integer.toString(engine.getPlayerScore()));
     }
 }

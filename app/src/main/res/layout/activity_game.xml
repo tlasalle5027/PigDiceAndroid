@@ -95,6 +95,7 @@
             android:id="@+id/stayButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="endTurn"
             android:enabled="false"
             android:text="@string/stay" />
 
