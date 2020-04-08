@@ -105,28 +105,67 @@ public class GameLogic {
     }
 
     public void endTurn(View v){
-        rollButton = (Button)v.findViewById(R.id.rollButton);
         stayButton = (Button)v.findViewById(R.id.stayButton);
 
         stayButton.setEnabled(false);
         playerScore += runningScore;
         runningScore = 0;
 
-        rollButton.setEnabled(true);
+        //checkWinner(playerScore, compScore);
+        computerTurn(v);
     }
 
     public void computerTurn(View v){
+        rollButton = (Button)v.findViewById(R.id.rollButton);
         int roll = 0;
-        diceImage = (ImageView)v.findViewById(R.id.diceImage);
 
         switch(difficulty){
             case 1:
+                for(int i = 1; i <= 3; i++){
+                    roll = turn();
+                    if(roll == 1){
+                        changeDiceImage(v, roll);
+                        runningScore = 0;
+                        break;
+                    }
+                    changeDiceImage(v, roll);
+                    runningScore += roll;
+                }
                 break;
             case 2:
+                if(playerScore <= compScore){
+                    for(int i = 1; i <= 3; i++){
+                        roll = turn();
+                        if(roll == 1){
+                            changeDiceImage(v, roll);
+                            runningScore = 0;
+                            break;
+                        }
+                        changeDiceImage(v, roll);
+                        runningScore += roll;
+                    }
+                }
+                else{
+                    while(playerScore > compScore){
+                        roll = turn();
+                        if(roll == 1){
+                            changeDiceImage(v, roll);
+                            runningScore = 0;
+                            break;
+                        }
+                        changeDiceImage(v, roll);
+                        runningScore += roll;
+                    }
+                }
                 break;
             case 3:
                 break;
         }
+        compScore += runningScore;
+        runningScore = 0;
+
+        //checkWinner(playerScore, compScore);
+        rollButton.setEnabled(true);
 
     }
 

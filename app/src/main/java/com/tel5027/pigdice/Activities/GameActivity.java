@@ -68,9 +68,10 @@ public class GameActivity extends AppCompatActivity {
         runScore.setText(Integer.toString(engine.getRunningScore()));
     }
 
-    public void endTurn(View view) {
+    public void endTurn(View view){
         engine.endTurn(gameScreen);
         runScore.setText(Integer.toString(engine.getRunningScore()));
         pScore.setText(Integer.toString(engine.getPlayerScore()));
+        cScore.setText(Integer.toString(engine.getCompScore()));
     }
 }
