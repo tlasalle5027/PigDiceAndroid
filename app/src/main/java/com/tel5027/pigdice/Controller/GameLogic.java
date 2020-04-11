@@ -1,6 +1,5 @@
 package com.tel5027.pigdice.Controller;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,7 +12,6 @@ import java.util.Random;
 public class GameLogic {
 
     private Random pigroll;
-    private OptionStore os;
 
     private int endScore;
     private int difficulty;
@@ -21,17 +19,14 @@ public class GameLogic {
     private int playerScore;
     private int compScore;
 
-    private ImageView diceImage;
-
     private Button rollButton;
     private Button stayButton;
 
     public GameLogic(OptionStore o){
-        os = o;
         pigroll = new Random();
 
-        difficulty = os.getDifficulty();
-        endScore = os.getEndScore();
+        difficulty = o.getDifficulty();
+        endScore = o.getEndScore();
 
         runningScore = 0;
         playerScore = 0;
@@ -50,7 +45,7 @@ public class GameLogic {
         return runningScore;
     }
 
-    public int turn(){
+    private int turn(){
         return pigroll.nextInt(6) + 1;
     }
 
@@ -58,8 +53,8 @@ public class GameLogic {
         return (pScore < endScore && cScore < endScore);
     }
 
-    public void changeDiceImage(View v, int roll){
-        diceImage = (ImageView)v.findViewById(R.id.diceImage);
+    private void changeDiceImage(View v, int roll){
+        ImageView diceImage = v.findViewById(R.id.diceImage);
         switch(roll){
             case 1:
                 diceImage.setImageResource(R.drawable.die_1);
@@ -82,11 +77,11 @@ public class GameLogic {
         }
     }
 
-    public int playerTurn(View v){
-        int roll = 0;
+    public void playerTurn(View v){
+        int roll;
 
-        rollButton = (Button)v.findViewById(R.id.rollButton);
-        stayButton = (Button)v.findViewById(R.id.stayButton);
+        rollButton = v.findViewById(R.id.rollButton);
+        stayButton = v.findViewById(R.id.stayButton);
 
         roll = turn();
         stayButton.setEnabled(true);
@@ -100,12 +95,10 @@ public class GameLogic {
         }
 
         runningScore += roll;
-
-        return roll;
     }
 
     public void endTurn(View v){
-        stayButton = (Button)v.findViewById(R.id.stayButton);
+        stayButton = v.findViewById(R.id.stayButton);
 
         stayButton.setEnabled(false);
         playerScore += runningScore;
@@ -115,9 +108,9 @@ public class GameLogic {
         computerTurn(v);
     }
 
-    public void computerTurn(View v){
-        rollButton = (Button)v.findViewById(R.id.rollButton);
-        int roll = 0;
+    private void computerTurn(View v){
+        rollButton = v.findViewById(R.id.rollButton);
+        int roll;
 
         switch(difficulty){
             case 1:
@@ -128,6 +121,7 @@ public class GameLogic {
                         runningScore = 0;
                         break;
                     }
+
                     changeDiceImage(v, roll);
                     runningScore += roll;
                 }
