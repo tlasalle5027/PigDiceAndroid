@@ -1,9 +1,13 @@
 package com.tel5027.pigdice.Controller;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.tel5027.pigdice.Activities.GameActivity;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.OptionStore;
 
@@ -12,6 +16,9 @@ import java.util.Random;
 public class GameLogic {
 
     private Random pigroll;
+
+    private String pName;
+    private String cName;
 
     private int endScore;
     private int difficulty;
@@ -27,10 +34,25 @@ public class GameLogic {
 
         difficulty = o.getDifficulty();
         endScore = o.getEndScore();
+        pName = o.getName();
+
+        switch(o.getDifficulty()){
+            case 1:
+                cName = "Earl";
+                break;
+            case 2:
+                cName = "Ian";
+                break;
+            case 3 :
+                cName = "Harry";
+                break;
+        }
 
         runningScore = 0;
         playerScore = 0;
         compScore = 0;
+
+
     }
 
     public int getPlayerScore(){
@@ -49,8 +71,37 @@ public class GameLogic {
         return pigroll.nextInt(6) + 1;
     }
 
-    public boolean checkWinner(int pScore, int cScore){
-        return (pScore < endScore && cScore < endScore);
+    private boolean checkWinner(){
+        return (playerScore > endScore || compScore > endScore);
+    }
+
+    private void winnerDialog(Context ctx){
+
+        if(playerScore > compScore){
+            new AlertDialog.Builder(ctx)
+                    .setTitle("You Win!")
+                    .setMessage(pName + " has won!")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+        else{
+            new AlertDialog.Builder(ctx)
+                    .setTitle(cName + " wins!")
+                    .setMessage(cName + " has won!")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
+
     }
 
     private void changeDiceImage(View v, int roll){
@@ -98,14 +149,22 @@ public class GameLogic {
     }
 
     public void endTurn(View v){
+        rollButton = v.findViewById(R.id.rollButton);
         stayButton = v.findViewById(R.id.stayButton);
 
         stayButton.setEnabled(false);
         playerScore += runningScore;
         runningScore = 0;
 
-        //checkWinner(playerScore, compScore);
-        computerTurn(v);
+        if(checkWinner()){
+            rollButton.setEnabled(false);
+            stayButton.setEnabled(false);
+            winnerDialog(v.getContext());
+        }
+        else{
+            computerTurn(v);
+        }
+
     }
 
     private void computerTurn(View v){
@@ -158,8 +217,14 @@ public class GameLogic {
         compScore += runningScore;
         runningScore = 0;
 
-        //checkWinner(playerScore, compScore);
-        rollButton.setEnabled(true);
+        if(checkWinner()){
+            rollButton.setEnabled(false);
+            stayButton.setEnabled(false);
+            winnerDialog(v.getContext());
+        }
+        else{
+            rollButton.setEnabled(true);
+        }
 
     }
 

@@ -2,6 +2,8 @@ package com.tel5027.pigdice.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -74,4 +76,5 @@ public class GameActivity extends AppCompatActivity {
         pScore.setText(Integer.toString(engine.getPlayerScore()));
         cScore.setText(Integer.toString(engine.getCompScore()));
     }
+
 }
