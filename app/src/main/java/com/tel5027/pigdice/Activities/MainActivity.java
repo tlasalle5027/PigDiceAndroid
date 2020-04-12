@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         startGameAd = new InterstitialAd(this);
-        startGameAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        startGameAd.setAdUnitId("ca-app-pub-2961110423231573/9746550124");
         startGameAd.loadAd(new AdRequest.Builder().build());
 
         startGameAd.setAdListener(new AdListener(){
             @Override
             public void onAdFailedToLoad(int errorCode){
-                Intent i = new Intent(MainActivity.this, GameActivity.class);
-                startActivity(i);
+                Log.d("TAG", "The interstitial failed to load. Error Code: " + errorCode);
+
             }
 
             @Override
