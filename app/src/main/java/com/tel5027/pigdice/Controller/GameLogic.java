@@ -75,7 +75,7 @@ public class GameLogic {
     }
 
     private boolean checkWinner(){
-        return (playerScore > endScore || compScore > endScore);
+        return (playerScore >= endScore || compScore >= endScore);
     }
 
     private void winnerDialog(Context ctx){
@@ -176,7 +176,7 @@ public class GameLogic {
 
         switch(difficulty){
             case 1:
-                for(int i = 1; i <= 3; i++){
+                for(int i = 1; i <= 2; i++){
                     roll = turn();
                     if(roll == 1){
                         changeDiceImage(v, roll);
@@ -216,11 +216,11 @@ public class GameLogic {
                 break;
             case 3:
                 while(hardCompDecision){
-                    double prob = 0;
+                    double prob;
                     roll = turn();
                     if(roll == 1){
                         prob = Math.random();
-                        if(prob <= .08){
+                        if(prob <= .09){
                             changeDiceImage(v, roll);
                             runningScore = 0;
                             break;
@@ -232,8 +232,8 @@ public class GameLogic {
                     changeDiceImage(v, roll);
                     runningScore += roll;
                     if((compScore + runningScore >= endScore) || (runningScore >= 25)
-                     || (((playerScore - (compScore + runningScore) < 18))) &&
-                    runningScore >= 15){
+                     || (((playerScore - (compScore + runningScore) < 18)) &&
+                            (runningScore >= 15))){
                         hardCompDecision = false;
                         break;
                     }

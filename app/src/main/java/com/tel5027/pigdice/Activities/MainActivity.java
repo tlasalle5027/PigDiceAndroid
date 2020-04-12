@@ -36,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         startGameAd.setAdListener(new AdListener(){
             @Override
+            public void onAdFailedToLoad(int errorCode){
+                Intent i = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(i);
+            }
+
+            @Override
             public void onAdClosed(){
                 startGameAd.loadAd(new AdRequest.Builder().build());
                 Intent i = new Intent(MainActivity.this, GameActivity.class);
@@ -55,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             startGameAd.show();
         } else {
             Log.d("TAG", "The interstitial wasn't loaded yet.");
+            Intent i = new Intent(MainActivity.this, GameActivity.class);
+            startActivity(i);
         }
     }
 
