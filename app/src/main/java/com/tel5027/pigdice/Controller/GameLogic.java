@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.tel5027.pigdice.Activities.GameActivity;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.OptionStore;
 
@@ -78,7 +77,7 @@ public class GameLogic {
     private void winnerDialog(Context ctx){
 
         if(playerScore > compScore){
-            new AlertDialog.Builder(ctx)
+            new AlertDialog.Builder(ctx, android.R.style.Theme_Material_Dialog_Alert)
                     .setTitle("You Win!")
                     .setMessage(pName + " has won!")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -86,11 +85,11 @@ public class GameLogic {
 
                         }
                     })
-                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setIcon(android.R.drawable.ic_dialog_info)
                     .show();
         }
         else{
-            new AlertDialog.Builder(ctx)
+            new AlertDialog.Builder(ctx, android.R.style.Theme_Material_Dialog_Alert)
                     .setTitle(cName + " wins!")
                     .setMessage(cName + " has won!")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
