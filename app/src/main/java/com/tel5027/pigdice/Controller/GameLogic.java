@@ -25,6 +25,8 @@ public class GameLogic {
     private int playerScore;
     private int compScore;
 
+    private boolean hardCompDecision;
+
     private Button rollButton;
     private Button stayButton;
 
@@ -50,6 +52,8 @@ public class GameLogic {
         runningScore = 0;
         playerScore = 0;
         compScore = 0;
+
+        hardCompDecision = true;
 
 
     }
@@ -211,10 +215,34 @@ public class GameLogic {
                 }
                 break;
             case 3:
+                while(hardCompDecision){
+                    double prob = 0;
+                    roll = turn();
+                    if(roll == 1){
+                        prob = Math.random();
+                        if(prob >= .08){
+                            changeDiceImage(v, roll);
+                            runningScore = 0;
+                            break;
+                        }
+                        else{
+                            roll = 2;
+                        }
+                    }
+                    changeDiceImage(v, roll);
+                    runningScore += roll;
+                    if((compScore + runningScore >= endScore) || (runningScore >= 25)
+                     || (((playerScore - (compScore + runningScore) < 18))) &&
+                    runningScore >= 15){
+                        hardCompDecision = false;
+                        break;
+                    }
+                }
                 break;
         }
         compScore += runningScore;
         runningScore = 0;
+        hardCompDecision = true;
 
         if(checkWinner()){
             rollButton.setEnabled(false);
