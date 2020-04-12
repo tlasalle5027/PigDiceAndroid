@@ -220,7 +220,7 @@ public class GameLogic {
                     roll = turn();
                     if(roll == 1){
                         prob = Math.random();
-                        if(prob >= .08){
+                        if(prob <= .08){
                             changeDiceImage(v, roll);
                             runningScore = 0;
                             break;
