@@ -201,8 +201,20 @@ public class GameLogic {
                         runningScore += roll;
                     }
                 }
+                else if(playerScore - (compScore + runningScore) < 18){
+                    while(runningScore < 10){
+                        roll = turn();
+                        if(roll == 1){
+                            changeDiceImage(v, roll);
+                            runningScore = 0;
+                            break;
+                        }
+                        changeDiceImage(v, roll);
+                        runningScore += roll;
+                    }
+                }
                 else{
-                    while(playerScore > compScore){
+                    while(playerScore >= compScore){
                         roll = turn();
                         if(roll == 1){
                             changeDiceImage(v, roll);
