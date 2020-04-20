@@ -2,7 +2,8 @@
     <string name="app_name">Pig Dice</string>
     <string name="new_game">New Game</string>
     <string name="options">Options</string>
-    <string name="name">Name: </string>
+    <string name="name">Player 1: </string>
+    <string name="p2Name">Player 2: </string>
     <string name="difficulty">AI Difficulty: </string>
     <string name="end_score">Ending Score: </string>
     <string name="diff_easy">Easy</string>

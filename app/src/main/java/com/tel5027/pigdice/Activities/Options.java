@@ -16,6 +16,7 @@ public class Options extends AppCompatActivity {
     public static OptionStore os;
 
     public EditText name;
+    public EditText pTwoName;
     private int difficulty = 1;
     private int finalScore = 100;
 
@@ -28,7 +29,9 @@ public class Options extends AppCompatActivity {
 
     public void saveOptions(View view) {
         name = (EditText)findViewById(R.id.nameText);
+        pTwoName = (EditText)findViewById(R.id.pTwoNameText);
         os.setName(name.getText().toString());
+        os.setPlayerTwoName(pTwoName.getText().toString());
         os.setDifficulty(difficulty);
         os.setEndScore(finalScore);
 
@@ -39,11 +42,14 @@ public class Options extends AppCompatActivity {
         RadioButton easyButton = (RadioButton)findViewById(R.id.easyButton);
         RadioButton hundredButton = (RadioButton)findViewById(R.id.oneHundredPoints);
         name = (EditText)findViewById(R.id.nameText);
+        pTwoName = (EditText)findViewById(R.id.pTwoNameText);
         name.setText("");
+        pTwoName.setText("");
         easyButton.toggle();
         hundredButton.toggle();
 
         os.setName("PigDice");
+        os.setPlayerTwoName("PigTwo");
         os.setDifficulty(1);
         os.setEndScore(100);
     }
@@ -65,6 +71,10 @@ public class Options extends AppCompatActivity {
             case R.id.hardButton:
                 if(checked)
                     difficulty = 3;
+                    break;
+            case R.id.pvpButton:
+                if(checked)
+                    difficulty = 4;
                     break;
         }
     }

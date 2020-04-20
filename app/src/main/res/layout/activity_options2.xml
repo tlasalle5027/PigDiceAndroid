@@ -22,7 +22,7 @@
         <TableRow
             android:id="@+id/nameRow"
             android:layout_width="match_parent"
-            android:layout_height="68dp">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/nameLabel"
@@ -32,11 +32,30 @@
 
             <EditText
                 android:id="@+id/nameText"
-                android:layout_width="121dp"
+                android:layout_width="154dp"
                 android:layout_height="48dp"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/playerTwoNameRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/pTwoNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/p2Name" />
+
+            <EditText
+                android:id="@+id/pTwoNameText"
+                android:layout_width="112dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
         </TableRow>
 
         <TableRow
@@ -76,6 +95,12 @@
                     android:layout_height="wrap_content"
                     android:onClick="difficultyRadioButtonClick"
                     android:text="@string/diff_hard" />
+
+                <RadioButton
+                    android:id="@+id/pvpButton"
+                    android:layout_width="119dp"
+                    android:layout_height="wrap_content"
+                    android:text="P v P" />
             </RadioGroup>
         </TableRow>
 
@@ -175,4 +200,5 @@
         </TableRow>
 
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

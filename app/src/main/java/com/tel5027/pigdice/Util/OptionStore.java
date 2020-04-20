@@ -2,6 +2,7 @@ package com.tel5027.pigdice.Util;
 
 public class OptionStore {
     private String name;
+    private String playerTwoName;
     private int difficulty;
     private int endScore;
 
@@ -18,6 +19,10 @@ public class OptionStore {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getPlayerTwoName() { return playerTwoName; }
+
+    public void setPlayerTwoName(String playerTwoName) { this.playerTwoName = playerTwoName; }
 
     public int getDifficulty() {
         return difficulty;
