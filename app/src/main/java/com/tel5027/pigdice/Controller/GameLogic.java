@@ -3,9 +3,11 @@ package com.tel5027.pigdice.Controller;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.OptionStore;
@@ -30,6 +32,10 @@ public class GameLogic {
 
     private Button rollButton;
     private Button stayButton;
+
+    private TextView pOneName;
+    private TextView pTwoName;
+
 
     public GameLogic(OptionStore o){
         pigroll = new Random();
@@ -142,6 +148,8 @@ public class GameLogic {
 
         rollButton = v.findViewById(R.id.rollButton);
         stayButton = v.findViewById(R.id.stayButton);
+        pOneName   = v.findViewById(R.id.playerName);
+        pTwoName   = v.findViewById(R.id.compName);
 
         roll = turn();
         stayButton.setEnabled(true);
@@ -155,6 +163,15 @@ public class GameLogic {
         }
 
         runningScore += roll;
+
+        if(!playerTwoTurn){
+            pOneName.setTextColor(Color.GREEN);
+            pTwoName.setTextColor(Color.BLACK);
+        }
+        else{
+            pOneName.setTextColor(Color.BLACK);
+            pTwoName.setTextColor(Color.GREEN);
+        }
     }
 
     public void endTurn(View v){
@@ -170,7 +187,6 @@ public class GameLogic {
             stayButton.setEnabled(false);
             compScore += runningScore;
             runningScore = 0;
-            playerTwoTurn = false;
         }
 
         if(checkWinner()){
@@ -181,6 +197,10 @@ public class GameLogic {
         else{
             if(!playerTwoTurn){
                 computerTurn(v);
+            }
+            else{
+                playerTwoTurn = false;
+                rollButton.setEnabled(true);
             }
         }
     }
