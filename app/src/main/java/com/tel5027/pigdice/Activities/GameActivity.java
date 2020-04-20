@@ -58,6 +58,9 @@ public class GameActivity extends AppCompatActivity {
             case 3 :
                 cName.setText("Harry");
                 break;
+            case 4:
+                cName.setText(os.getPlayerTwoName());
+                break;
         }
     }
 

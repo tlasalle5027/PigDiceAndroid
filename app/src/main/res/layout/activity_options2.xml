@@ -100,6 +100,7 @@
                     android:id="@+id/pvpButton"
                     android:layout_width="119dp"
                     android:layout_height="wrap_content"
+                    android:onClick="difficultyRadioButtonClick"
                     android:text="P v P" />
             </RadioGroup>
         </TableRow>

@@ -26,6 +26,7 @@ public class GameLogic {
     private int compScore;
 
     private boolean hardCompDecision;
+    private boolean playerTwoTurn;
 
     private Button rollButton;
     private Button stayButton;
@@ -37,6 +38,8 @@ public class GameLogic {
         endScore = o.getEndScore();
         pName = o.getName();
 
+        playerTwoTurn = false;
+
         switch(o.getDifficulty()){
             case 1:
                 cName = "Earl";
@@ -46,6 +49,9 @@ public class GameLogic {
                 break;
             case 3 :
                 cName = "Harry";
+                break;
+            case 4:
+                cName = o.getPlayerTwoName();
                 break;
         }
 
@@ -155,9 +161,17 @@ public class GameLogic {
         rollButton = v.findViewById(R.id.rollButton);
         stayButton = v.findViewById(R.id.stayButton);
 
-        stayButton.setEnabled(false);
-        playerScore += runningScore;
-        runningScore = 0;
+        if(!playerTwoTurn){
+            stayButton.setEnabled(false);
+            playerScore += runningScore;
+            runningScore = 0;
+        }
+        else{
+            stayButton.setEnabled(false);
+            compScore += runningScore;
+            runningScore = 0;
+            playerTwoTurn = false;
+        }
 
         if(checkWinner()){
             rollButton.setEnabled(false);
@@ -165,9 +179,10 @@ public class GameLogic {
             winnerDialog(v.getContext());
         }
         else{
-            computerTurn(v);
+            if(!playerTwoTurn){
+                computerTurn(v);
+            }
         }
-
     }
 
     private void computerTurn(View v){
@@ -251,10 +266,16 @@ public class GameLogic {
                     }
                 }
                 break;
+            case 4:
+                playerTwoTurn = true;
+                break;
         }
-        compScore += runningScore;
-        runningScore = 0;
-        hardCompDecision = true;
+
+        if(!(difficulty == 4)) {
+            compScore += runningScore;
+            runningScore = 0;
+            hardCompDecision = true;
+        }
 
         if(checkWinner()){
             rollButton.setEnabled(false);
