@@ -8,10 +8,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.OptionStore;
 
 public class Options extends AppCompatActivity {
+
+    private AdView oAdView;
     
     public static OptionStore os;
 
@@ -25,6 +32,15 @@ public class Options extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options2);
         os = new OptionStore();
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        oAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        oAdView.loadAd(adRequest);
     }
 
     public void saveOptions(View view) {
