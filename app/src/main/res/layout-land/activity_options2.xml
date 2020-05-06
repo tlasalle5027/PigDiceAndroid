@@ -7,14 +7,15 @@
     tools:context=".Activities.Options">
 
     <TableLayout
-        android:layout_width="699dp"
-        android:layout_height="401dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/tableLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,8 +34,21 @@
 
             <EditText
                 android:id="@+id/nameText"
-                android:layout_width="121dp"
-                android:layout_height="48dp"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/pTwoNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/p2Name" />
+
+            <EditText
+                android:id="@+id/pTwoNameText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName" />
 
@@ -43,7 +57,7 @@
         <TableRow
             android:id="@+id/difficultyRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="101dp">
 
             <TextView
                 android:id="@+id/difficultyLabel"
@@ -51,33 +65,45 @@
                 android:layout_height="wrap_content"
                 android:text="@string/difficulty" />
 
-            <RadioGroup
-                android:id="@+id/difficultyGroup"
+            <RadioButton
+                android:id="@+id/easyButton"
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="difficultyRadioButtonClick"
+                android:text="@string/diff_easy" />
+
+            <RadioButton
+                android:id="@+id/intButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="difficultyRadioButtonClick"
+                android:text="@string/diff_int" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/difficultyRowTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" />
 
-                <RadioButton
-                    android:id="@+id/easyButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:onClick="difficultyRadioButtonClick"
-                    android:text="@string/diff_easy" />
+            <RadioButton
+                android:id="@+id/hardButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="difficultyRadioButtonClick"
+                android:text="@string/diff_hard" />
 
-                <RadioButton
-                    android:id="@+id/intButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="difficultyRadioButtonClick"
-                    android:text="@string/diff_int" />
-
-                <RadioButton
-                    android:id="@+id/hardButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="difficultyRadioButtonClick"
-                    android:text="@string/diff_hard" />
-            </RadioGroup>
+            <RadioButton
+                android:id="@+id/pvpButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="difficultyRadioButtonClick"
+                android:text="P v P" />
         </TableRow>
 
         <TableRow
@@ -91,64 +117,64 @@
                 android:layout_height="wrap_content"
                 android:text="@string/end_score" />
 
-            <RadioGroup
-                android:id="@+id/endScoreGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/fiftyPoints"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="scoreRadioButtonClick"
-                    android:text="50" />
-
-                <RadioButton
-                    android:id="@+id/oneHundredPoints"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:onClick="scoreRadioButtonClick"
-                    android:text="100" />
-
-                <RadioButton
-                    android:id="@+id/oneHundredFiftyPoints"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="scoreRadioButtonClick"
-                    android:text="150" />
-
-                <RadioButton
-                    android:id="@+id/twoHundredPoints"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="scoreRadioButtonClick"
-                    android:text="200" />
-
-                <RadioButton
-                    android:id="@+id/marathonMode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="scoreRadioButtonClick"
-                    android:text="Marathon Mode (500)" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/iconAttrib"
-                android:layout_width="wrap_content"
+            <RadioButton
+                android:id="@+id/fiftyPoints"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Icon made by Freepik from www.flaticon.com" />
+                android:onClick="scoreRadioButtonClick"
+                android:text="50" />
+
+            <RadioButton
+                android:id="@+id/oneHundredPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:onClick="scoreRadioButtonClick"
+                android:text="100" />
+
+            <RadioButton
+                android:id="@+id/oneHundredFiftyPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="scoreRadioButtonClick"
+                android:text="150" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/endScoreRowTwo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/twoHundredPoints"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="scoreRadioButtonClick"
+                android:text="200" />
+
+            <RadioButton
+                android:id="@+id/marathonMode"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:onClick="scoreRadioButtonClick"
+                android:text="Marathon (500)" />
         </TableRow>
 
         <TableRow
             android:id="@+id/buttonRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="317dp"
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="193dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/holo_green_light"
                 android:onClick="saveOptions"
                 android:text="@string/opt_save" />
 
@@ -158,8 +184,9 @@
 
             <Button
                 android:id="@+id/clearButton"
-                android:layout_width="252dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_green_light"
                 android:onClick="clearOptions"
                 android:text="@string/opt_clear" />
 
@@ -168,13 +195,40 @@
         <TableRow
             android:id="@+id/attribRow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
+            <TextView
+                android:id="@+id/iconAttrib"
+                android:layout_width="174dp"
+                android:layout_height="54dp"
+                android:text="Icon made by Freepik from www.flaticon.com" />
+
         </TableRow>
 
     </TableLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
+        android:layout_marginBottom="64dp"
+        app:adSize="BANNER"
+        app:adUnitId="ca-app-pub-2961110423231573/7067934360"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        app:layout_constraintVertical_bias="0.0"></com.google.android.gms.ads.AdView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

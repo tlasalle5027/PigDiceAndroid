@@ -8,45 +8,47 @@
 
     <ImageView
         android:id="@+id/image_view_PigTitle"
-        android:layout_width="357dp"
-        android:layout_height="235dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:layout_marginBottom="110dp"
         android:src="@drawable/pig_title"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
 
     <Button
         android:id="@+id/newGameButton"
-        android:layout_width="288dp"
-        android:layout_height="137dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="218dp"
+        android:layout_marginRight="218dp"
+        android:layout_marginBottom="75dp"
         android:background="@android:color/holo_green_light"
         android:onClick="openGame"
         android:text="@string/new_game"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/optionsButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/optionsButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/optionsButton"
-        android:layout_width="288dp"
-        android:layout_height="137dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="287dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginRight="93dp"
+        android:layout_marginBottom="75dp"
         android:background="@android:color/holo_green_light"
         android:onClick="openOptions"
         android:text="@string/options"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
