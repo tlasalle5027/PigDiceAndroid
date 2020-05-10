@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }
+  }
 
     public void openOptions(View view) {
         Intent i = new Intent(MainActivity.this, Options.class);

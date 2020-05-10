@@ -3,6 +3,7 @@ package com.tel5027.pigdice.Controller;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
@@ -10,13 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tel5027.pigdice.R;
-import com.tel5027.pigdice.Util.OptionStore;
 
 import java.util.Random;
 
 public class GameLogic {
 
     private Random pigroll;
+
+    private SharedPreferences pref;
 
     private String pName;
     private String cName;
@@ -37,16 +39,16 @@ public class GameLogic {
     private TextView pTwoName;
 
 
-    public GameLogic(OptionStore o){
+    public GameLogic(SharedPreferences o){
         pigroll = new Random();
 
-        difficulty = o.getDifficulty();
-        endScore = o.getEndScore();
-        pName = o.getName();
+        difficulty = o.getInt("difficulty", -1);
+        endScore = o.getInt("end_score", -1);
+        pName = o.getString("player_one_name", null);
 
         playerTwoTurn = false;
 
-        switch(o.getDifficulty()){
+        switch(difficulty){
             case 1:
                 cName = "Earl";
                 break;
@@ -57,7 +59,7 @@ public class GameLogic {
                 cName = "Harry";
                 break;
             case 4:
-                cName = o.getPlayerTwoName();
+                cName = o.getString("player_two_name", null);
                 break;
         }
 

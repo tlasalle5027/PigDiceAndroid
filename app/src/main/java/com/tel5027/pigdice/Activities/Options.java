@@ -2,7 +2,8 @@ package com.tel5027.pigdice.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -13,17 +14,17 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
 import com.tel5027.pigdice.R;
-import com.tel5027.pigdice.Util.OptionStore;
+import com.tel5027.pigdice.Util.Constants;
 
 public class Options extends AppCompatActivity {
 
-    private AdView oAdView;
-    
-    public static OptionStore os;
+    private Editor prefEditor;
 
     public EditText name;
     public EditText pTwoName;
+
     private int difficulty = 1;
     private int finalScore = 100;
 
@@ -31,43 +32,42 @@ public class Options extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options2);
-        os = new OptionStore();
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
+        prefEditor = pref.edit();
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        oAdView = findViewById(R.id.adView);
+        AdView oAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         oAdView.loadAd(adRequest);
     }
 
     public void saveOptions(View view) {
-        name = (EditText)findViewById(R.id.nameText);
-        pTwoName = (EditText)findViewById(R.id.pTwoNameText);
-        os.setName(name.getText().toString());
-        os.setPlayerTwoName(pTwoName.getText().toString());
-        os.setDifficulty(difficulty);
-        os.setEndScore(finalScore);
+        name = findViewById(R.id.nameText);
+        pTwoName = findViewById(R.id.pTwoNameText);
+
+        prefEditor.putString("player_one_name", name.getText().toString());
+        prefEditor.putString("player_two_name", pTwoName.getText().toString());
+        prefEditor.putInt("difficulty", difficulty);
+        prefEditor.putInt("end_score", finalScore);
+        prefEditor.commit();
 
         finish();
     }
 
     public void clearOptions(View view) {
-        RadioButton easyButton = (RadioButton)findViewById(R.id.easyButton);
-        RadioButton hundredButton = (RadioButton)findViewById(R.id.oneHundredPoints);
-        name = (EditText)findViewById(R.id.nameText);
-        pTwoName = (EditText)findViewById(R.id.pTwoNameText);
+        RadioButton easyButton = findViewById(R.id.easyButton);
+        RadioButton hundredButton = findViewById(R.id.oneHundredPoints);
+        name = findViewById(R.id.nameText);
+        pTwoName = findViewById(R.id.pTwoNameText);
         name.setText("");
         pTwoName.setText("");
         easyButton.toggle();
         hundredButton.toggle();
-
-        os.setName("PigDice");
-        os.setPlayerTwoName("PigTwo");
-        os.setDifficulty(1);
-        os.setEndScore(100);
     }
 
     public void difficultyRadioButtonClick(View view) {

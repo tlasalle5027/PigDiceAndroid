@@ -2,53 +2,46 @@ package com.tel5027.pigdice.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.tel5027.pigdice.Controller.GameLogic;
 import com.tel5027.pigdice.R;
-import com.tel5027.pigdice.Util.OptionStore;
+import com.tel5027.pigdice.Util.Constants;
 
 public class GameActivity extends AppCompatActivity {
 
-    public OptionStore os;
     private GameLogic engine;
     private View gameScreen;
 
-    private TextView pName;
     private TextView pScore;
-    private TextView cName;
     private TextView cScore;
     private TextView runScore;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        if(Options.os == null){
-            os = new OptionStore();
-        }
-        else{
-            os = Options.os;
-        }
+        SharedPreferences os = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
 
         engine = new GameLogic(os);
 
         gameScreen = this.findViewById(android.R.id.content);
 
-        pName = (TextView)findViewById(R.id.playerName);
-        pScore = (TextView)findViewById(R.id.playerScore);
-        cName = (TextView)findViewById(R.id.compName);
-        cScore = (TextView)findViewById(R.id.compScore);
-        runScore = (TextView)findViewById(R.id.runningScoreView);
+        TextView pName = findViewById(R.id.playerName);
+        pScore = findViewById(R.id.playerScore);
+        TextView cName = findViewById(R.id.compName);
+        cScore = findViewById(R.id.compScore);
+        runScore = findViewById(R.id.runningScoreView);
 
-        pName.setText(os.getName());
+        pName.setText(os.getString("player_one_name", null));
 
-        switch(os.getDifficulty()){
+        switch(os.getInt("difficulty", 0)){
             case 1:
                 cName.setText("Earl");
                 break;
@@ -59,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
                 cName.setText("Harry");
                 break;
             case 4:
-                cName.setText(os.getPlayerTwoName());
+                cName.setText(os.getString("player_two_name", null));
                 break;
         }
     }
@@ -68,11 +61,13 @@ public class GameActivity extends AppCompatActivity {
         finish();
     }
 
+    @SuppressLint("SetTextI18n")
     public void rollDice(View view) {
         engine.playerTurn(gameScreen);
         runScore.setText(Integer.toString(engine.getRunningScore()));
     }
 
+    @SuppressLint("SetTextI18n")
     public void endTurn(View view){
         engine.endTurn(gameScreen);
         runScore.setText(Integer.toString(engine.getRunningScore()));
