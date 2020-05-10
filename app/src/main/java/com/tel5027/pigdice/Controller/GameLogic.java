@@ -34,6 +34,8 @@ public class GameLogic {
     private Button rollButton;
     private Button stayButton;
 
+    private SharedPreferences pref;
+
 
     public GameLogic(SharedPreferences o){
         pigroll = new Random();
@@ -62,6 +64,8 @@ public class GameLogic {
         runningScore = 0;
         playerScore = 0;
         compScore = 0;
+
+        pref = o;
 
         hardCompDecision = true;
 
@@ -120,26 +124,53 @@ public class GameLogic {
 
     private void changeDiceImage(View v, int roll){
         ImageView diceImage = v.findViewById(R.id.diceImage);
-        switch(roll){
+        switch(pref.getInt("dice_style", -1)){
             case 1:
-                diceImage.setImageResource(R.drawable.die_1);
+                switch(roll){
+                    case 1:
+                        diceImage.setImageResource(R.drawable.die_1);
+                        break;
+                    case 2:
+                        diceImage.setImageResource(R.drawable.die_2);
+                        break;
+                    case 3:
+                        diceImage.setImageResource(R.drawable.die_3);
+                        break;
+                    case 4:
+                        diceImage.setImageResource(R.drawable.die_4);
+                        break;
+                    case 5:
+                        diceImage.setImageResource(R.drawable.die_5);
+                        break;
+                    case 6:
+                        diceImage.setImageResource(R.drawable.die_6);
+                        break;
+                }
                 break;
             case 2:
-                diceImage.setImageResource(R.drawable.die_2);
-                break;
-            case 3:
-                diceImage.setImageResource(R.drawable.die_3);
-                break;
-            case 4:
-                diceImage.setImageResource(R.drawable.die_4);
-                break;
-            case 5:
-                diceImage.setImageResource(R.drawable.die_5);
-                break;
-            case 6:
-                diceImage.setImageResource(R.drawable.die_6);
+                switch(roll){
+                    case 1:
+                        diceImage.setImageResource(R.drawable.die_1_002);
+                        break;
+                    case 2:
+                        diceImage.setImageResource(R.drawable.die_2_002);
+                        break;
+                    case 3:
+                        diceImage.setImageResource(R.drawable.die_3_002);
+                        break;
+                    case 4:
+                        diceImage.setImageResource(R.drawable.die_4_002);
+                        break;
+                    case 5:
+                        diceImage.setImageResource(R.drawable.die_5_002);
+                        break;
+                    case 6:
+                        diceImage.setImageResource(R.drawable.die_6_002);
+                        break;
+                }
                 break;
         }
+
     }
 
     public void playerTurn(View v){

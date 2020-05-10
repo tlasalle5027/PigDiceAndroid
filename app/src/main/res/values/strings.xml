@@ -17,6 +17,7 @@
     <string name="skip">Skip</string>
     <string name="quit">Quit</string>
     <string name="running_score">Running Score: </string>
+    <string name="dice_styles">Dice Styles</string>
 
     <string name="dice_001">Basic Red</string>
     <string name="dice_002">Red Numeric</string>

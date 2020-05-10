@@ -34,14 +34,19 @@ public class DiceSelection extends AppCompatActivity {
             case R.id.dice001Button:
                 if (checked)
                     prefEdit.putInt("dice_style", 1);
+                    prefEdit.commit();
                 break;
             case R.id.dice002Button:
                 if (checked)
                     prefEdit.putInt("dice_style", 2);
+                    prefEdit.commit();
                 break;
         }
 
-        prefEdit.commit();
+    }
 
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 }

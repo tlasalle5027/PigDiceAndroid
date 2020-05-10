@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private InterstitialAd startGameAd;
 
+    private SharedPreferences pref;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
+        pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         editor = pref.edit();
   }
 
@@ -64,8 +65,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGame(View view) {
-        editor.putInt("dice_style", 1);
-        editor.commit();
+        if(!(pref.contains("dice_style"))){
+            editor.putInt("dice_style", 1);
+            editor.commit();
+        }
+
         if (startGameAd.isLoaded()) {
             startGameAd.show();
         } else {
@@ -75,8 +79,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void openDiceStyles(View view) {
+        Intent i = new Intent(MainActivity.this, DiceSelection.class);
+        startActivity(i);
+    }
+
     @Override
     public void onBackPressed(){
         finish();
     }
+
+
 }
