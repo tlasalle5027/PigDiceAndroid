@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tel5027.pigdice.Controller.GameLogic;
@@ -28,6 +29,17 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         SharedPreferences os = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
+
+        ImageView diceImage = findViewById(R.id.diceImage);
+
+        switch(os.getInt("dice_style", -1)){
+            case 1:
+                diceImage.setImageResource(R.drawable.die_1);
+                break;
+            case 2:
+                diceImage.setImageResource(R.drawable.die_1_002);
+                break;
+        }
 
         engine = new GameLogic(os);
 

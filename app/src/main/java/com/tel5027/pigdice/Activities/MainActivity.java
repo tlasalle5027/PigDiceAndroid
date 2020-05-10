@@ -3,6 +3,7 @@ package com.tel5027.pigdice.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +16,13 @@ import com.tel5027.pigdice.R;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.tel5027.pigdice.Util.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
     private InterstitialAd startGameAd;
+
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
+        editor = pref.edit();
   }
 
     public void openOptions(View view) {
@@ -57,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openGame(View view) {
+        editor.putInt("dice_style", 1);
+        editor.commit();
         if (startGameAd.isLoaded()) {
             startGameAd.show();
         } else {

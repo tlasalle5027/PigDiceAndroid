@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.GameActivity"></activity>
+        <activity android:name=".Activities.DiceSelection"></activity>
+        <activity android:name=".Activities.GameActivity" />
         <activity android:name=".Activities.Options" />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
@@ -24,7 +25,6 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-2961110423231573~7503530161" />
-
     </application>
 
 </manifest>

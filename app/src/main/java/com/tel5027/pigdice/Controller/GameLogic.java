@@ -1,5 +1,6 @@
 package com.tel5027.pigdice.Controller;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,8 +19,6 @@ public class GameLogic {
 
     private Random pigroll;
 
-    private SharedPreferences pref;
-
     private String pName;
     private String cName;
 
@@ -34,9 +33,6 @@ public class GameLogic {
 
     private Button rollButton;
     private Button stayButton;
-
-    private TextView pOneName;
-    private TextView pTwoName;
 
 
     public GameLogic(SharedPreferences o){
@@ -92,6 +88,7 @@ public class GameLogic {
         return (playerScore >= endScore || compScore >= endScore);
     }
 
+    @SuppressLint("InlinedApi")
     private void winnerDialog(Context ctx){
 
         if(playerScore > compScore){
@@ -150,8 +147,8 @@ public class GameLogic {
 
         rollButton = v.findViewById(R.id.rollButton);
         stayButton = v.findViewById(R.id.stayButton);
-        pOneName   = v.findViewById(R.id.playerName);
-        pTwoName   = v.findViewById(R.id.compName);
+        TextView pOneName = v.findViewById(R.id.playerName);
+        TextView pTwoName = v.findViewById(R.id.compName);
 
         roll = turn();
         stayButton.setEnabled(true);
