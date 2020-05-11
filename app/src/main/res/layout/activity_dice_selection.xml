@@ -44,6 +44,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/die_1_002" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/dice003Image"
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/die_1_003" />
             </TableRow>
 
             <TableRow
@@ -68,6 +78,17 @@
                     android:layout_height="wrap_content"
                     android:onClick="selectDice"
                     android:text="@string/dice_002" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/dice003Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="selectDice"
+                    android:text="@string/dice_003" />
             </TableRow>
 
             <TableRow
