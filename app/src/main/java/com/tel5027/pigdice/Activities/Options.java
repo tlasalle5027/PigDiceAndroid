@@ -2,12 +2,14 @@ package com.tel5027.pigdice.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -15,8 +17,20 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
+import com.tel5027.pigdice.MyApplication;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
+
+import org.solovyev.android.checkout.ActivityCheckout;
+import org.solovyev.android.checkout.Billing;
+import org.solovyev.android.checkout.BillingRequests;
+import org.solovyev.android.checkout.Checkout;
+import org.solovyev.android.checkout.EmptyRequestListener;
+import org.solovyev.android.checkout.Inventory;
+import org.solovyev.android.checkout.ProductTypes;
+import org.solovyev.android.checkout.Purchase;
+
+import javax.annotation.Nonnull;
 
 public class Options extends AppCompatActivity {
 
@@ -28,6 +42,32 @@ public class Options extends AppCompatActivity {
     private int difficulty = 1;
     private int finalScore = 100;
 
+    private final ActivityCheckout mCheckout = Checkout.forActivity(this, MyApplication.get().getBilling());
+    private Inventory mInventory;
+
+    private class PurchaseListener extends EmptyRequestListener<Purchase> {
+        @Override
+        public void onSuccess(Purchase purchase) {
+            prefEditor.putBoolean("remove_ads", true);
+        }
+
+        @Override
+        public void onError(int response, Exception e) {
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    e.getMessage(),
+                    Toast.LENGTH_SHORT);
+
+            toast.show();
+        }
+    }
+
+    private class InventoryCallback implements Inventory.Callback {
+        @Override
+        public void onLoaded(Inventory.Products products) {
+            // your code here
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +75,15 @@ public class Options extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         prefEditor = pref.edit();
+
+        mCheckout.start();
+
+        mCheckout.createPurchaseFlow(new PurchaseListener());
+
+        mInventory = mCheckout.makeInventory();
+        mInventory.load(Inventory.Request.create()
+                .loadAllPurchases()
+                .loadSkus(ProductTypes.IN_APP, "remove_ads"), new InventoryCallback());
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -44,6 +93,18 @@ public class Options extends AppCompatActivity {
         AdView oAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         oAdView.loadAd(adRequest);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mCheckout.stop();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mCheckout.onActivityResult(requestCode, resultCode, data);
     }
 
     public void saveOptions(View view) {
@@ -122,5 +183,14 @@ public class Options extends AppCompatActivity {
                     finalScore = 500;
                 break;
         }
+    }
+
+    public void removeAds(View view) {
+        mCheckout.whenReady(new Checkout.EmptyListener() {
+            @Override
+            public void onReady(BillingRequests requests) {
+                requests.purchase(ProductTypes.IN_APP, "remove_ads", null, mCheckout.getPurchaseFlow());
+            }
+        });
     }
 }
