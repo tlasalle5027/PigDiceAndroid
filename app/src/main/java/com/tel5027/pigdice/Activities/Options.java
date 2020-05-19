@@ -41,9 +41,13 @@ public class Options extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        AdView oAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        oAdView.loadAd(adRequest);
+
+        Boolean adFree = pref.getBoolean("adfree", false);
+        if(!adFree) {
+            AdView oAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            oAdView.loadAd(adRequest);
+        }
 
     }
 

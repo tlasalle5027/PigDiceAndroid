@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -20,14 +18,10 @@ import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-import com.tel5027.pigdice.R;
 
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.adcolony.sdk.*;
+
+import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
 
 import java.util.ArrayList;
@@ -35,13 +29,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PurchasesUpdatedListener {
 
-    private InterstitialAd startGameAd;
-
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private String ITEM_SKU_ADREMOVAL = "remove_ads";
     private BillingClient billingClient;
-    private ImageButton removeAdsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         });
 
         List skuList = new ArrayList();
-        skuList.add(ITEM_SKU_ADREMOVAL);
+        skuList.add(Constants.REMOVE_ADS_ITEM);
         SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
         params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
         billingClient.querySkuDetailsAsync(params.build(), new SkuDetailsResponseListener() {
@@ -76,41 +66,24 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
             }
         });
 
-        removeAdsButton = findViewById(R.id.remove_ads);
+        ImageButton removeAdsButton = findViewById(R.id.remove_ads);
         removeAdsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 BillingFlowParams params = BillingFlowParams.newBuilder()
-                        .setSku(ITEM_SKU_ADREMOVAL)
+                        .setSku(Constants.REMOVE_ADS_ITEM)
                         .setType(BillingClient.SkuType.INAPP)
                         .build();
                 int responseCode = billingClient.launchBillingFlow(MainActivity.this, params);
             }
         });
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        startGameAd = new InterstitialAd(this);
-        startGameAd.setAdUnitId("ca-app-pub-2961110423231573/9746550124");
-        startGameAd.loadAd(new AdRequest.Builder().build());
+        AdColonyAppOptions options = new AdColonyAppOptions()
+                .setGDPRConsentString("1")
+                .setGDPRRequired(true)
+                .setKeepScreenOn(true);
 
-        startGameAd.setAdListener(new AdListener(){
-            @Override
-            public void onAdFailedToLoad(int errorCode){
-                Log.d("TAG", "The interstitial failed to load. Error Code: " + errorCode);
-
-            }
-
-            @Override
-            public void onAdClosed(){
-                startGameAd.loadAd(new AdRequest.Builder().build());
-                Intent i = new Intent(MainActivity.this, GameActivity.class);
-                startActivity(i);
-            }
-        });
+        AdColony.configure(this, options, Constants.APP_ID, Constants.NEW_GAME_AD);
 
         pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         editor = pref.edit();
@@ -128,14 +101,18 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
             editor.commit();
         }
 
-        Boolean adFree = pref.getBoolean("adfree", false);
+        boolean adFree = pref.getBoolean("adfree", false);
         if(!adFree){
-            if (startGameAd.isLoaded()) {
-                startGameAd.show();
-            }
+            AdColonyInterstitialListener listener = new AdColonyInterstitialListener() {
+                @Override
+                public void onRequestFilled(@org.jetbrains.annotations.NotNull AdColonyInterstitial ad) {
+
+                    ad.show();
+                }
+            };
+            AdColony.requestInterstitial(Constants.NEW_GAME_AD, listener);
         }
 
-        Log.d("TAG", "The interstitial wasn't loaded yet.");
         Intent i = new Intent(MainActivity.this, GameActivity.class);
         startActivity(i);
     }
@@ -170,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
     }
 
     private void handlePurchase(Purchase purchase) {
-        if (purchase.getSku().equals(ITEM_SKU_ADREMOVAL)) {
+        if (purchase.getSku().equals(Constants.REMOVE_ADS_ITEM)) {
             editor.putBoolean("adfree", true).commit();
         }
     }
