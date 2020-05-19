@@ -161,24 +161,6 @@
         </TableRow>
 
         <TableRow
-            android:id="@+id/removeAdsRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_light"
-                android:onClick="removeAds"
-                android:text="@string/remove_ads" />
-        </TableRow>
-
-        <TableRow
             android:id="@+id/buttonRow"
             android:layout_width="317dp"
             android:layout_height="wrap_content">
