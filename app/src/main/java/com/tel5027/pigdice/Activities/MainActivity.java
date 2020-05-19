@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         });
 
         AdColonyAppOptions options = new AdColonyAppOptions()
-                .setGDPRConsentString("1")
+                .setGDPRConsentString("0")
                 .setGDPRRequired(true)
                 .setKeepScreenOn(true);
 

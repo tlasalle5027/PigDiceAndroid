@@ -162,8 +162,8 @@
 
         <TableRow
             android:id="@+id/buttonRow"
-            android:layout_width="317dp"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/clearButton"
@@ -186,7 +186,7 @@
         <TableRow
             android:id="@+id/attribRow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <Space
                 android:layout_width="wrap_content"
@@ -200,26 +200,25 @@
 
         </TableRow>
 
-    </TableLayout>
+        <TableRow
+            android:id="@+id/adRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="45dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginRight="46dp"
-        android:layout_marginBottom="64dp"
-        app:adSize="BANNER"
-        app:adUnitId="ca-app-pub-2961110423231573/7067934360"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
-        app:layout_constraintVertical_bias="0.0"></com.google.android.gms.ads.AdView>
+            <RelativeLayout
+                android:id="@+id/ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginLeft="64dp"
+                android:layout_marginEnd="64dp"
+                android:layout_marginRight="64dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </TableRow>
+
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
+
+import com.adcolony.sdk.*;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -28,27 +31,35 @@ public class Options extends AppCompatActivity {
     private int difficulty = 1;
     private int finalScore = 100;
 
+    private AdColonyAdViewListener listener;
+    private AdColonyAdOptions adOptions;
+    private RelativeLayout adContainer;
+    private AdColonyAdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options2);
 
+        adContainer = findViewById(R.id.ad_container);
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         prefEditor = pref.edit();
 
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        listener = new AdColonyAdViewListener(){
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            public void onRequestFilled(AdColonyAdView adColonyAdView) {
+                adContainer.addView(adColonyAdView);
+                adView = adColonyAdView;
             }
-        });
+        };
+
+        AdColony.configure(this, Constants.APP_ID, Constants.OPTIONS_AD);
 
         Boolean adFree = pref.getBoolean("adfree", false);
         if(!adFree) {
-            AdView oAdView = findViewById(R.id.adView);
-            AdRequest adRequest = new AdRequest.Builder().build();
-            oAdView.loadAd(adRequest);
+            AdColony.requestAdView(Constants.OPTIONS_AD, listener, AdColonyAdSize.BANNER);
         }
-
     }
 
 
