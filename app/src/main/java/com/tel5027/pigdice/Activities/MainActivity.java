@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
     private SharedPreferences.Editor editor;
     private BillingClient billingClient;
 
+    private AdColonyInterstitial ad;
+    private AdColonyInterstitialListener listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +88,35 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
 
         AdColony.configure(this, options, Constants.APP_ID, Constants.NEW_GAME_AD);
 
+        listener = new AdColonyInterstitialListener() {
+            @Override
+            public void onRequestFilled(@org.jetbrains.annotations.NotNull AdColonyInterstitial ad) {
+                MainActivity.this.ad = ad;
+            }
+
+            @Override
+            public void onRequestNotFilled(AdColonyZone zone) {
+                // Ad request was not filled
+                Toast.makeText(MainActivity.this, "Cannot fill AD request", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onOpened(AdColonyInterstitial ad) {
+                AdColony.requestInterstitial(Constants.NEW_GAME_AD, this);
+            }
+
+            @Override
+            public void onExpiring(AdColonyInterstitial ad) {
+                // Request a new ad if ad is expiring
+                AdColony.requestInterstitial(Constants.NEW_GAME_AD, this);
+            }
+        };
+
+        AdColony.requestInterstitial(Constants.NEW_GAME_AD, listener);
+
         pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         editor = pref.edit();
+
   }
 
     public void openOptions(View view) {
@@ -103,18 +133,14 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
 
         boolean adFree = pref.getBoolean("adfree", false);
         if(!adFree){
-            AdColonyInterstitialListener listener = new AdColonyInterstitialListener() {
-                @Override
-                public void onRequestFilled(@org.jetbrains.annotations.NotNull AdColonyInterstitial ad) {
-
-                    ad.show();
-                }
-            };
-            AdColony.requestInterstitial(Constants.NEW_GAME_AD, listener);
+            if(ad != null){
+                ad.show();
+            }
         }
 
         Intent i = new Intent(MainActivity.this, GameActivity.class);
         startActivity(i);
+
     }
 
     public void openDiceStyles(View view) {

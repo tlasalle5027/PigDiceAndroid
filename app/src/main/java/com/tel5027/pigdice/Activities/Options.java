@@ -9,14 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.adcolony.sdk.*;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
@@ -32,7 +27,6 @@ public class Options extends AppCompatActivity {
     private int finalScore = 100;
 
     private AdColonyAdViewListener listener;
-    private AdColonyAdOptions adOptions;
     private RelativeLayout adContainer;
     private AdColonyAdView adView;
 
@@ -46,12 +40,25 @@ public class Options extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         prefEditor = pref.edit();
 
+        if(adContainer.getChildCount() > 0)
+        {
+            adContainer.removeView(adView);
+        }
+
         listener = new AdColonyAdViewListener(){
             @Override
             public void onRequestFilled(AdColonyAdView adColonyAdView) {
                 adContainer.addView(adColonyAdView);
                 adView = adColonyAdView;
             }
+
+            @Override
+            public void onRequestNotFilled(AdColonyZone zone) {
+                // Ad request was not filled
+                Toast.makeText(Options.this, "Cannot fill AD request " + zone.getZoneID(), Toast.LENGTH_SHORT).show();
+
+            }
+
         };
 
         AdColony.configure(this, Constants.APP_ID, Constants.OPTIONS_AD);

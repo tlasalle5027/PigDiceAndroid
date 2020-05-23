@@ -8,8 +8,8 @@ android {
         applicationId "com.tel5027.pigdice"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 6
-        versionName "2.5"
+        versionCode 7
+        versionName "2.51"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:19.1.0'
     implementation 'com.android.billingclient:billing:1.2'
     implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }
