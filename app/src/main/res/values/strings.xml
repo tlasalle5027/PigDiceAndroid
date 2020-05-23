@@ -22,4 +22,5 @@
     <string name="dice_001">Basic Red</string>
     <string name="dice_002">Red Numeric</string>
     <string name="dice_003">Red Pips</string>
+    <string name="dice_004">Basic</string>
 </resources>

@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
             @Override
             public void onRequestNotFilled(AdColonyZone zone) {
                 // Ad request was not filled
-                Toast.makeText(MainActivity.this, "Cannot fill AD request", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Cannot fill AD request", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
 
     public void openGame(View view) {
         if(!(pref.contains("dice_style"))){
-            editor.putInt("dice_style", 1);
+            editor.putInt("dice_style", 4);
             editor.commit();
         }
 

@@ -55,7 +55,7 @@ public class Options extends AppCompatActivity {
             @Override
             public void onRequestNotFilled(AdColonyZone zone) {
                 // Ad request was not filled
-                Toast.makeText(Options.this, "Cannot fill AD request " + zone.getZoneID(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Options.this, "Cannot fill AD request " + zone.getZoneID(), Toast.LENGTH_SHORT).show();
 
             }
 

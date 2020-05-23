@@ -46,6 +46,11 @@ public class DiceSelection extends AppCompatActivity {
                     prefEdit.putInt("dice_style", 3);
                     prefEdit.commit();
                 break;
+            case R.id.dice004Button:
+                if (checked)
+                    prefEdit.putInt("dice_style", 4);
+                prefEdit.commit();
+                break;
         }
 
     }

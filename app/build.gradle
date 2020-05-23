@@ -8,8 +8,8 @@ android {
         applicationId "com.tel5027.pigdice"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 7
-        versionName "2.51"
+        versionCode 8
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
