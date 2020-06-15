@@ -166,7 +166,13 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
                 Toast.makeText(this, "Purchase cancelled", Toast.LENGTH_SHORT).show();
             }else{
                 if(responseCode == BillingClient.BillingResponse.ITEM_ALREADY_OWNED){
-                    Toast.makeText(this, "You already bought that", Toast.LENGTH_SHORT).show();
+                    if(!(pref.contains("adfree"))){
+                        editor.putBoolean("adfree", true).commit();
+                        Toast.makeText(this, "Purchase restored!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(this, "You already bought that", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         }
