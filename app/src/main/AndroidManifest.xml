@@ -16,10 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true" >
-        <activity android:name=".Activities.DiceSelection"></activity>
-        <activity android:name=".Activities.GameActivity" />
-        <activity android:name=".Activities.Options" />
-        <activity android:name=".Activities.MainActivity" >
+        <activity android:name=".Activities.DiceSelection"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activities.GameActivity"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".Activities.Options"
+                  android:screenOrientation="portrait" />
+        <activity android:name=".Activities.MainActivity"
+                  android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
