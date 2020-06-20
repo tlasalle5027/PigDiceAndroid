@@ -117,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         editor = pref.edit();
 
+        if(!(pref.contains("PigPoints"))){
+            editor.putInt("PigPoints", 0).commit();
+        }
   }
 
     public void openOptions(View view) {
