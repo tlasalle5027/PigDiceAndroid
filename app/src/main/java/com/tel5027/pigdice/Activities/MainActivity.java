@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
@@ -36,10 +37,14 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
     private AdColonyInterstitial ad;
     private AdColonyInterstitialListener listener;
 
+    private TextView pigPoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pigPoints = findViewById(R.id.pigPointsText);
 
         billingClient = BillingClient.newBuilder(MainActivity.this).setListener(this).build();
         billingClient.startConnection(new BillingClientStateListener() {
@@ -120,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         if(!(pref.contains("PigPoints"))){
             editor.putInt("PigPoints", 0).commit();
         }
+
+        pigPoints.setText(Integer.toString(pref.getInt("PigPoints", 0)));
   }
 
     public void openOptions(View view) {
@@ -143,6 +150,12 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
 
         Intent i = new Intent(MainActivity.this, GameActivity.class);
         startActivity(i);
+
+        int new_pig_point_total = pref.getInt("PigPoints", 0);
+        new_pig_point_total++;
+
+        editor.putInt("PigPoints", new_pig_point_total).commit();
+        pigPoints.setText(Integer.toString(pref.getInt("PigPoints", 0)));
 
     }
 
