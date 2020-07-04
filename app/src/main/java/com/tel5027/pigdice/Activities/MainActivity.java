@@ -129,6 +129,12 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         pigPoints.setText(Integer.toString(pref.getInt("PigPoints", 0)));
   }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pigPoints.setText(Integer.toString(pref.getInt("PigPoints", 0)));
+    }
+
     public void openOptions(View view) {
         Intent i = new Intent(MainActivity.this, Options.class);
         startActivity(i);
@@ -155,8 +161,6 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
         new_pig_point_total++;
 
         editor.putInt("PigPoints", new_pig_point_total).commit();
-        pigPoints.setText(Integer.toString(pref.getInt("PigPoints", 0)));
-
     }
 
     public void openDiceStyles(View view) {
