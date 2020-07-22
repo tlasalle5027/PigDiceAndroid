@@ -7,11 +7,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tel5027.pigdice.Controller.GameLogic;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
+
+import com.facebook.ads.*;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class GameActivity extends AppCompatActivity {
     private TextView pScore;
     private TextView cScore;
     private TextView runScore;
+
+    private AdView adview;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -73,6 +78,20 @@ public class GameActivity extends AppCompatActivity {
                 cName.setText(os.getString("player_two_name", null));
                 break;
         }
+
+        boolean adFree = os.getBoolean("adfree", false);
+        if(!adFree){
+            adview = new AdView(this, Constants.FB_GAME_BANNER, AdSize.BANNER_HEIGHT_50);
+
+            // Find the Ad Container
+            LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+
+            // Add the ad view to your activity layout
+            adContainer.addView(adview);
+
+            // Request an ad
+            adview.loadAd();
+        }
     }
 
     public void quitGame(View view) {
@@ -91,6 +110,14 @@ public class GameActivity extends AppCompatActivity {
         runScore.setText(Integer.toString(engine.getRunningScore()));
         pScore.setText(Integer.toString(engine.getPlayerScore()));
         cScore.setText(Integer.toString(engine.getCompScore()));
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adview != null) {
+            adview.destroy();
+        }
+        super.onDestroy();
     }
 
 }

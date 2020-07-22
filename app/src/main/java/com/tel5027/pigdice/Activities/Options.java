@@ -9,9 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.adcolony.sdk.*;
+import com.facebook.ads.*;
 
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
@@ -26,46 +25,30 @@ public class Options extends AppCompatActivity {
     private int difficulty = 1;
     private int finalScore = 100;
 
-    private AdColonyAdViewListener listener;
-    private RelativeLayout adContainer;
-    private AdColonyAdView adView;
+    private AdView adview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options2);
-
-        adContainer = findViewById(R.id.ad_container);
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         prefEditor = pref.edit();
 
-        if(adContainer.getChildCount() > 0)
-        {
-            adContainer.removeView(adView);
-        }
+        boolean adFree = pref.getBoolean("adfree", false);
+        if (!adFree) {
+            // Instantiate an AdView object.
+            // NOTE: The placement ID from the Facebook Monetization Manager identifies your App.
+            // To get test ads, add IMG_16_9_APP_INSTALL# to your placement id. Remove this when your app is ready to serve real ads.
 
-        listener = new AdColonyAdViewListener(){
-            @Override
-            public void onRequestFilled(AdColonyAdView adColonyAdView) {
-                adContainer.addView(adColonyAdView);
-                adView = adColonyAdView;
-            }
+            adview = new AdView(this, Constants.FB_OPTIONS_BANNER, AdSize.BANNER_HEIGHT_50);
 
-            @Override
-            public void onRequestNotFilled(AdColonyZone zone) {
-                // Ad request was not filled
-                //Toast.makeText(Options.this, "Cannot fill AD request " + zone.getZoneID(), Toast.LENGTH_SHORT).show();
+            RelativeLayout adContainer = findViewById(R.id.ad_container);
 
-            }
+            // Add the ad view to your activity layout
+            adContainer.addView(adview);
 
-        };
-
-        AdColony.configure(this, Constants.APP_ID, Constants.OPTIONS_AD);
-
-        Boolean adFree = pref.getBoolean("adfree", false);
-        if(!adFree) {
-            AdColony.requestAdView(Constants.OPTIONS_AD, listener, AdColonyAdSize.BANNER);
+            // Request an ad
+            adview.loadAd();
         }
     }
 
@@ -99,23 +82,23 @@ public class Options extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.easyButton:
                 if (checked)
                     difficulty = 1;
-                    break;
+                break;
             case R.id.intButton:
                 if (checked)
                     difficulty = 2;
-                    break;
+                break;
             case R.id.hardButton:
-                if(checked)
+                if (checked)
                     difficulty = 3;
-                    break;
+                break;
             case R.id.pvpButton:
-                if(checked)
+                if (checked)
                     difficulty = 4;
-                    break;
+                break;
         }
     }
 
@@ -124,7 +107,7 @@ public class Options extends AppCompatActivity {
         boolean checked = ((RadioButton) view).isChecked();
 
         // Check which radio button was clicked
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.fiftyPoints:
                 if (checked)
                     finalScore = 50;
@@ -146,5 +129,13 @@ public class Options extends AppCompatActivity {
                     finalScore = 500;
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adview != null) {
+            adview.destroy();
+        }
+        super.onDestroy();
     }
 }

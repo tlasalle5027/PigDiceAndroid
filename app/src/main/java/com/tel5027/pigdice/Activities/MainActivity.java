@@ -22,6 +22,8 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import com.adcolony.sdk.*;
 
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.AudienceNetworkAds;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
 
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AudienceNetworkAds.initialize(this);
+        AdSettings.addTestDevice("ea487e3a-ce11-4123-9bcf-15f5d6e60320");
+        AdSettings.addTestDevice("5798c330-275c-402c-b404-90d2b5b85a5c");
+        AdSettings.addTestDevice("7ba8eef2-b80c-46a2-8d58-997f0a3c8fa6");
 
         pigPoints = findViewById(R.id.pigPointsText);
 
