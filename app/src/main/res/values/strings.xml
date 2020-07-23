@@ -23,4 +23,8 @@
     <string name="dice_002">Red Numeric</string>
     <string name="dice_003">Red Pips</string>
     <string name="dice_004">Basic</string>
+
+    <!--Purchasable Dice -->
+    <string name="dice_005_Unowned">Rainbow Pips (200 PP)</string>
+    <string name="dice_005">Rainbow Pips</string>
 </resources>

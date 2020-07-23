@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "954881294798",
+    "firebase_url": "https://pig-dice-f56ac.firebaseio.com",
+    "project_id": "pig-dice-f56ac",
+    "storage_bucket": "pig-dice-f56ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:954881294798:android:892b04663bc0ab8153ab9f",
+        "android_client_info": {
+          "package_name": "com.tel5027.pigdice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "954881294798-bds3dh58a2gj18cnbcuck5mk6ud02pna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAphfufn5igPoofQbgjM5TC3PQOHeXwoY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "954881294798-bds3dh58a2gj18cnbcuck5mk6ud02pna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

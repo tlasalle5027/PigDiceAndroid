@@ -69,6 +69,15 @@
                     android:layout_marginBottom="11dp"
                     app:srcCompat="@drawable/die_1_003" />
 
+                <ImageView
+                    android:id="@+id/dice005Image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginRight="27dp"
+                    app:srcCompat="@drawable/die_2_005" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -124,6 +133,17 @@
                         android:layout_height="wrap_content"
                         android:onClick="selectDice"
                         android:text="@string/dice_003" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="81dp" />
+
+                    <RadioButton
+                        android:id="@+id/dice005Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectDice"
+                        android:text="@string/dice_005_Unowned" />
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
