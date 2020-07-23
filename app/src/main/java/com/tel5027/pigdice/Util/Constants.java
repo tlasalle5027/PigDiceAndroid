@@ -11,6 +11,4 @@ public class Constants {
     public static final String OPTIONS_AD = "vz9df9b882fa48445c9e";
     public static final String GAME_AD = "vz80fc95dc703448f493";
 
-    public static final String FB_GAME_BANNER = "3095049860572935_3095052293906025";
-    public static final String FB_OPTIONS_BANNER = "3095049860572935_3095191150558806";
 }

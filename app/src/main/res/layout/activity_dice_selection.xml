@@ -73,10 +73,25 @@
                     android:id="@+id/dice005Image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:layout_marginStart="17dp"
                     android:layout_marginLeft="17dp"
                     android:layout_marginTop="11dp"
+                    android:layout_marginEnd="27dp"
                     android:layout_marginRight="27dp"
+                    android:layout_marginBottom="11dp"
                     app:srcCompat="@drawable/die_2_005" />
+
+                <ImageView
+                    android:id="@+id/dice006Image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginEnd="27dp"
+                    android:layout_marginRight="27dp"
+                    android:layout_marginBottom="11dp"
+                    app:srcCompat="@drawable/die_1_006" />
 
             </LinearLayout>
 
@@ -144,6 +159,17 @@
                         android:layout_height="wrap_content"
                         android:onClick="selectDice"
                         android:text="@string/dice_005_Unowned" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="81dp" />
+
+                    <RadioButton
+                        android:id="@+id/dice006Button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="selectDice"
+                        android:text="@string/dice_006_Unowned" />
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>

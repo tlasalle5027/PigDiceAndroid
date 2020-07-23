@@ -63,7 +63,20 @@ public class DiceSelection extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(this, "Not enough PigPoints!", Toast.LENGTH_SHORT).show();
-                        prefEdit.putInt("PigPoints", 2000).commit();
+                    }
+                break;
+            case R.id.dice006Button:
+                if (checked)
+                    if(pref.contains("dice_006_owned")){
+                        ((RadioButton)view).setText(R.string.dice_006);
+                        prefEdit.putInt("dice_style", 6).commit();
+                    }
+                    else if(pref.getInt("PigPoints", -1) >= 200){
+                        String bText = getString(R.string.dice_006);
+                        purchaseMessage(this, view,200, 6, "dice_006_owned", bText);
+                    }
+                    else{
+                        Toast.makeText(this, "Not enough PigPoints!", Toast.LENGTH_SHORT).show();
                     }
                 break;
         }

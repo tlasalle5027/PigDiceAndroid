@@ -27,4 +27,6 @@
     <!--Purchasable Dice -->
     <string name="dice_005_Unowned">Rainbow Pips (200 PP)</string>
     <string name="dice_005">Rainbow Pips</string>
+    <string name="dice_006_Unowned">Inverse (200 PP)</string>
+    <string name="dice_006">Inverse</string>
 </resources>

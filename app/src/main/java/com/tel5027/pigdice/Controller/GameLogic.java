@@ -235,6 +235,28 @@ public class GameLogic {
                         break;
                 }
                 break;
+            case 6:
+                switch(roll){
+                    case 1:
+                        diceImage.setImageResource(R.drawable.die_1_006);
+                        break;
+                    case 2:
+                        diceImage.setImageResource(R.drawable.die_2_006);
+                        break;
+                    case 3:
+                        diceImage.setImageResource(R.drawable.die_3_006);
+                        break;
+                    case 4:
+                        diceImage.setImageResource(R.drawable.die_4_006);
+                        break;
+                    case 5:
+                        diceImage.setImageResource(R.drawable.die_5_006);
+                        break;
+                    case 6:
+                        diceImage.setImageResource(R.drawable.die_6_006);
+                        break;
+                }
+                break;
         }
 
     }

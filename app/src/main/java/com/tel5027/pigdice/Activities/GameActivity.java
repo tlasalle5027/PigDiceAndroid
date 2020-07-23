@@ -55,6 +55,9 @@ public class GameActivity extends AppCompatActivity {
             case 5:
                 diceImage.setImageResource(R.drawable.die_1_005);
                 break;
+            case 6:
+                diceImage.setImageResource(R.drawable.die_1_006);
+                break;
         }
 
         engine = new GameLogic(os);
