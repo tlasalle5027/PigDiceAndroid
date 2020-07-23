@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
-import com.facebook.ads.*;
+import com.adcolony.sdk.AdColony;
+import com.adcolony.sdk.AdColonyAdSize;
+import com.adcolony.sdk.AdColonyAdView;
+import com.adcolony.sdk.AdColonyAdViewListener;
 
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
@@ -25,7 +28,7 @@ public class Options extends AppCompatActivity {
     private int difficulty = 1;
     private int finalScore = 100;
 
-    private AdView adview;
+    private AdColonyAdView adview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +37,23 @@ public class Options extends AppCompatActivity {
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Constants.PREFS_FILE, 0);
         prefEditor = pref.edit();
 
+        AdColony.configure(this, Constants.APP_ID, Constants.OPTIONS_AD);
+
         boolean adFree = pref.getBoolean("adfree", false);
         if (!adFree) {
-            // Instantiate an AdView object.
-            // NOTE: The placement ID from the Facebook Monetization Manager identifies your App.
-            // To get test ads, add IMG_16_9_APP_INSTALL# to your placement id. Remove this when your app is ready to serve real ads.
 
-            adview = new AdView(this, Constants.FB_OPTIONS_BANNER, AdSize.BANNER_HEIGHT_50);
+            final RelativeLayout adContainer = findViewById(R.id.ad_container);
 
-            RelativeLayout adContainer = findViewById(R.id.ad_container);
+            AdColonyAdViewListener listener = new AdColonyAdViewListener() {
+                @Override
+                public void onRequestFilled(AdColonyAdView ad) {
+                    /** Add this ad object to whatever layout you have set up for this placement */
+                    adview = ad;
+                    adContainer.addView(adview);
+                }
+            };
 
-            // Add the ad view to your activity layout
-            adContainer.addView(adview);
-
-            // Request an ad
-            adview.loadAd();
+            AdColony.requestAdView(Constants.OPTIONS_AD, listener, AdColonyAdSize.BANNER);
         }
     }
 

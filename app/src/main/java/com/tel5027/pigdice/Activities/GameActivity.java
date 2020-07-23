@@ -10,11 +10,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.adcolony.sdk.AdColony;
+import com.adcolony.sdk.AdColonyAdSize;
+import com.adcolony.sdk.AdColonyAdView;
+import com.adcolony.sdk.AdColonyAdViewListener;
 import com.tel5027.pigdice.Controller.GameLogic;
 import com.tel5027.pigdice.R;
 import com.tel5027.pigdice.Util.Constants;
-
-import com.facebook.ads.*;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView cScore;
     private TextView runScore;
 
-    private AdView adview;
+    private AdColonyAdView adview;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -82,18 +84,23 @@ public class GameActivity extends AppCompatActivity {
                 break;
         }
 
+        AdColony.configure(this, Constants.APP_ID, Constants.GAME_AD);
+
         boolean adFree = os.getBoolean("adfree", false);
         if(!adFree){
-            adview = new AdView(this, Constants.FB_GAME_BANNER, AdSize.BANNER_HEIGHT_50);
-
             // Find the Ad Container
-            LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+            final LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
 
-            // Add the ad view to your activity layout
-            adContainer.addView(adview);
+            AdColonyAdViewListener listener = new AdColonyAdViewListener() {
+                @Override
+                public void onRequestFilled(AdColonyAdView ad) {
+                    /** Add this ad object to whatever layout you have set up for this placement */
+                    adview = ad;
+                    adContainer.addView(adview);
+                }
+            };
 
-            // Request an ad
-            adview.loadAd();
+            AdColony.requestAdView(Constants.GAME_AD, listener, AdColonyAdSize.BANNER);
         }
     }
 
