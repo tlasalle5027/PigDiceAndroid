@@ -102,9 +102,9 @@
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="83dp"
                     android:layout_marginEnd="144dp"
                     android:layout_marginRight="144dp"
                     android:layout_marginBottom="316dp">
@@ -113,61 +113,47 @@
                         android:id="@+id/dice004Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="83dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_004" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="89dp" />
 
                     <RadioButton
                         android:id="@+id/dice001Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="83dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_001" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="89dp" />
 
                     <RadioButton
                         android:id="@+id/dice002Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="100dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_002" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="81dp" />
 
                     <RadioButton
                         android:id="@+id/dice003Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="83dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_003" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="81dp" />
 
                     <RadioButton
                         android:id="@+id/dice005Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="83dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_005_Unowned" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="81dp" />
 
                     <RadioButton
                         android:id="@+id/dice006Button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="83dp"
                         android:onClick="selectDice"
                         android:text="@string/dice_006_Unowned" />
                 </RadioGroup>

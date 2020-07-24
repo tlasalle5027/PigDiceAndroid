@@ -156,11 +156,6 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
 
         Intent i = new Intent(MainActivity.this, GameActivity.class);
         startActivity(i);
-
-        int new_pig_point_total = pref.getInt("PigPoints", 0);
-        new_pig_point_total++;
-
-        editor.putInt("PigPoints", new_pig_point_total).commit();
     }
 
     public void openDiceStyles(View view) {

@@ -35,6 +35,7 @@ public class GameLogic {
     private Button stayButton;
 
     private SharedPreferences pref;
+    private SharedPreferences.Editor edit;
 
 
     public GameLogic(SharedPreferences o){
@@ -43,6 +44,7 @@ public class GameLogic {
         difficulty = o.getInt("difficulty", -1);
         endScore = o.getInt("end_score", -1);
         pName = o.getString("player_one_name", null);
+        edit = o.edit();
 
         playerTwoTurn = false;
 
@@ -96,9 +98,20 @@ public class GameLogic {
     private void winnerDialog(Context ctx){
 
         if(playerScore > compScore){
+            int winningPigPoints = 0;
+            int currentPigPoints = pref.getInt("PigPoints", -1);
+            if(difficulty != 4){
+                winningPigPoints = ((playerScore - compScore)/10) * difficulty;
+                if (winningPigPoints <= 0){
+                    winningPigPoints = difficulty;
+                }
+                edit.putInt("PigPoints", (currentPigPoints + winningPigPoints)).commit();
+            }
+
             new AlertDialog.Builder(ctx, android.R.style.Theme_Material_Dialog_Alert)
                     .setTitle("You Win!")
-                    .setMessage(pName + " has won!")
+                    .setMessage(pName + " has won! \nYou have earned " +
+                                winningPigPoints + " Pig Points for winning!")
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -106,6 +119,7 @@ public class GameLogic {
                     })
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .show();
+
         }
         else{
             new AlertDialog.Builder(ctx, android.R.style.Theme_Material_Dialog_Alert)
