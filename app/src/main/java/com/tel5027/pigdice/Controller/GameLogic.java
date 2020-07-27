@@ -71,7 +71,6 @@ public class GameLogic {
 
         hardCompDecision = true;
 
-
     }
 
     public int getPlayerScore(){
@@ -437,7 +436,5 @@ public class GameLogic {
         else{
             rollButton.setEnabled(true);
         }
-
     }
-
 }
