@@ -9,9 +9,10 @@
     <TableLayout
         android:id="@+id/tableLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="64dp"
@@ -180,23 +181,6 @@
                 android:background="@android:color/holo_green_light"
                 android:onClick="saveOptions"
                 android:text="@string/opt_save" />
-
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/attribRow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/iconAttrib"
-                android:layout_width="233dp"
-                android:layout_height="54dp"
-                android:text="Icon made by Freepik from www.flaticon.com" />
 
         </TableRow>
 

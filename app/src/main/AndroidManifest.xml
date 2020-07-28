@@ -15,23 +15,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".Activities.DiceSelection"
-                  android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activities.GameActivity"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".Activities.Options"
-                  android:screenOrientation="portrait" />
-        <activity android:name=".Activities.MainActivity"
-                  android:screenOrientation="portrait">
-
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.AboutActivity"></activity>
+        <activity
+            android:name=".Activities.DiceSelection"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.GameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.Options"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

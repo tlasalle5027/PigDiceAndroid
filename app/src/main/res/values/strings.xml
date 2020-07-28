@@ -19,6 +19,22 @@
     <string name="running_score">Running Score: </string>
     <string name="dice_styles">Dice Styles</string>
 
+    <!--About Screen -->
+    <string name="version">Version: 3.0.0</string>
+    <string name="description_one">Pig Dice is a game played between two players</string>
+    <string name="object">The object is to reach the end score before your opponent can.</string>
+    <string name="rules_one">Start by rolling the dice</string>
+    <string name="rules_two">If you roll a 2 thru 6, add the value \nto your running total</string>
+    <string name="rules_three">You can choose to stay, and add your\nrunning total to your score</string>
+    <string name="rules_four">Or you can roll again, and build up your running total</string>
+    <string name="rules_five">If you roll a 1, you forfeit \nyour running total and your turn ends</string>
+    <string name="rules_six">Reach your pre-determined end score\nbefore your opponent, and win!</string>
+
+    <string name="credits">Credits</string>
+    <string name="credits_one">Game programmed by Thomas LaSalle from CFM Games</string>
+    <string name="credits_two">Pig icon made by Freepik from www.flaticon.com</string>
+
+    <!--Dice Names -->
     <string name="dice_001">Basic Red</string>
     <string name="dice_002">Red Numeric</string>
     <string name="dice_003">Red Pips</string>
