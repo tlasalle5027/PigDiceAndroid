@@ -198,4 +198,13 @@ public class MainActivity extends AppCompatActivity implements PurchasesUpdatedL
             editor.putBoolean("adfree", true).commit();
         }
     }
+
+    public void openAbout(View view) {
+        Intent i = new Intent(MainActivity.this, AboutActivity.class);
+        startActivity(i);
+    }
+
+    public void openShop(View view) {
+        Toast.makeText(this, "Shop Coming Soon!", Toast.LENGTH_SHORT).show();
+    }
 }

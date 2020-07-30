@@ -137,6 +137,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
         android:background="@android:color/white"
+        android:onClick="openAbout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/remove_ads"
         app:srcCompat="@drawable/about" />
@@ -151,6 +152,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="4dp"
         android:background="@android:color/white"
+        android:onClick="openShop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/aboutGameButton"
         app:layout_constraintHorizontal_bias="1.0"
