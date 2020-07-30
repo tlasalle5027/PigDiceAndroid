@@ -380,7 +380,7 @@ public class GameLogic {
                     }
                 }
                 else{
-                    while(playerScore >= compScore){
+                    while(playerScore >= (compScore + runningScore)){
                         roll = turn();
                         if(roll == 1){
                             changeDiceImage(v, roll);
